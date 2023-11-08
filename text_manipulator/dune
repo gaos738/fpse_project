@@ -1,0 +1,9 @@
+(rule
+  (target text_manipulator.zip)
+  (deps 
+    src/text_manipulator.ml
+    src/display.ml
+    src/dune
+  )
+  (action
+    (run zip -R text_manipulator.zip %{deps})))

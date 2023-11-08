@@ -1,0 +1,20 @@
+(library
+  (name display)
+  (modules display)
+  (libraries 
+    core)
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+
+
+(executable
+  (name text_manipulator)
+  (modules text_manipulator)
+  (libraries
+    display
+    core
+    core_unix.command_unix
+    str
+    )
+  (preprocess
+    (pps ppx_jane)))

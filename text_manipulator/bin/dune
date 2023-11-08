@@ -1,0 +1,4 @@
+(executable
+ (public_name text_manipulator)
+ (name main)
+ (libraries text_manipulator))

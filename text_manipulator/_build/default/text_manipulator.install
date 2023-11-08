@@ -1,0 +1,8 @@
+lib: [
+  "_build/install/default/lib/text_manipulator/META"
+  "_build/install/default/lib/text_manipulator/dune-package"
+  "_build/install/default/lib/text_manipulator/opam"
+]
+bin: [
+  "_build/install/default/bin/text_manipulator"
+]
