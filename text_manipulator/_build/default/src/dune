@@ -6,6 +6,14 @@
   (preprocess (pps ppx_jane bisect_ppx))
  )
 
+ (library
+  (name diff_algo)
+  (modules diff_algo)
+  (libraries 
+    core)
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+
 
 (executable
   (name text_manipulator)
