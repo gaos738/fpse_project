@@ -162,8 +162,7 @@ module Match_graph=
       let lcs_list = Match_graph.get_lcs_list labeled_g;;
       let lcs_string = Match_graph.lcs_ls_to_str lcs_list "abcd" "";;
 
-      "Currently it is not possible to change the font family or size outside the editor. You can however zoom the entire user interface in and out from the View menu."
-      "So I wonder if you can change it somehow. family or size outside the editor. You can how much non answers get up vote "
+    
       
       *)
 
