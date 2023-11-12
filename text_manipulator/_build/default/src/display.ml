@@ -28,8 +28,12 @@ let print_lines (str_lines: string list) (start_number: int) : unit =
     match lines with
     | [] -> ()
     | line::tl -> 
-      Stdio.printf "%s| " (get_line_number line_number);
-      Stdio.printf "%s\n" line; 
+      (*Stdio.printf "%s| " (get_line_number line_number);*)
+      let str_fr = "\027[30m "^(get_line_number line_number)^"|" in
+      print_string str_fr;
+      let str = "\027[31m "^line^" \n" in
+      print_string str;
+      (*Stdio.printf "%s\n" line; *)
       print_lines_aux tl (line_number+1) 
   in print_lines_aux str_lines start_number
 ;;
