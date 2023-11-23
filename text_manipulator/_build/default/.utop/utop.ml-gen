@@ -88,5 +88,6 @@ Clflags.include_dirs :=
   ; "/home/shang/fpse/fpse_project/text_manipulator/_build/default/lib/.text_manipulator.objs/byte"
   ; "/home/shang/fpse/fpse_project/text_manipulator/_build/default/src/.diff_algo.objs/byte"
   ; "/home/shang/fpse/fpse_project/text_manipulator/_build/default/src/.display.objs/byte"
+  ; "/home/shang/fpse/fpse_project/text_manipulator/_build/default/src/.merge.objs/byte"
   ];
 UTop_main.main ();

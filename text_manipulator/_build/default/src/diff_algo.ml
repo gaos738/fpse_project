@@ -1,6 +1,7 @@
 
 
 [@@@warning "-32"]
+[@@@warning "-27"]
 open Core
 
     type bfs_node = Null | Node of {coordinate:int*int; parent:bfs_node; path:(int*int) list}
@@ -22,11 +23,17 @@ open Core
       (List.fold ~f:(fun acc point ->
         if (stop_judge ~str1:str1 ~str2:str2 ~node:point) then true else acc || false) ~init:false layer)
     
+    
+    let rm_whitespace (str:string) : string =
+      String.filter str ~f:(fun char -> not (Char.equal char ' '))
 
 
     let str_equal (str1:string array) (str2:string array) (coordinate:int*int) : bool =
       let (x,y)=coordinate in
-      String.equal (Array.get str1 x) (Array.get str2 y)
+      let x_content= rm_whitespace (Array.get str1 x) in
+      let y_content= rm_whitespace (Array.get str2 y) in
+      Stdio.printf "|%s|%s| \n" x_content y_content;
+      String.equal x_content y_content
 
 
 
@@ -111,10 +118,12 @@ open Core
         else
           let str_hd, str_tl = string_hd input_str in
           let is_whitespace = String.equal str_hd " " in
-          if phys_equal is_whitespace last_ws then
-            string2list str_tl curr_ls (curr_word^str_hd) last_ws
-          else
+          let () = Stdio.printf "%b %b %s %s \n" last_ws is_whitespace str_hd str_tl in
+          if phys_equal last_ws true && phys_equal is_whitespace false then 
+            let () = Stdio.printf "should split \n" in
             string2list str_tl ( curr_word::curr_ls ) str_hd is_whitespace
+          else
+            string2list str_tl curr_ls (curr_word^str_hd) is_whitespace
       
 
 
@@ -142,44 +151,73 @@ open Core
 
 
 
-    let append_string (curr:(int*int)) (prev:(int*int)) (total_string:string) (str1:string array) (str2:string array): string =
+    let color_label_words (curr:(int*int)) (prev:(int*int)) (total_string:string) (str1:string array) (str2:string array) (last_color:string): (string*string) =
       let x,y = curr in
       let x_prev,y_prev = prev in
-      if Core.equal x (x_prev+1) && Core.equal y (y_prev+1) then
+      if Core.equal x (x_prev+1) && Core.equal y (y_prev+1)  then
         let curr_str = (Array.get str1 (x-1)) in
-        total_string^"\027[30m"^curr_str
-      else if Core.equal x (x_prev+1) && Core.equal y y_prev then 
+        if (String.equal last_color "\027[30m") then
+          (total_string^curr_str, "\027[30m")
+        else
+          (total_string^"\027[30m"^curr_str, "\027[30m")
+
+      else if Core.equal x (x_prev+1) && Core.equal y y_prev  then 
         let curr_str1 = (Array.get str1 (x-1)) in
-        total_string^"\027[31m"^curr_str1
-      else if Core.equal x x_prev && Core.equal y (y_prev+1) then 
+        if (String.equal last_color "\027[31m") then
+          (total_string^curr_str1, "\027[31m")
+        else
+        (total_string^"\027[31m"^curr_str1, "\027[31m")
+
+      else if Core.equal x x_prev && Core.equal y (y_prev+1)  then 
         let curr_str2 = (Array.get str2 (y-1)) in
-        total_string^"\027[32m"^curr_str2
+        if (String.equal last_color "\027[32m") then
+          (total_string^curr_str2, "\027[32m")
+        else
+        (total_string^"\027[32m"^curr_str2, "\027[32m")
+
       else 
-        let () = Stdio.printf "%i,%i %i,%i\n" x y x_prev y_prev in
-        failwith "unexpected coordinate"
+        failwith "expected string"
+        
 
 
-
-    let rec lcs_ls_to_str (ls:(int*int) list) (sample_str1:string array) (sample_str2:string array) (result_str:string): string =
+    let rec lcs_ls_to_color_str (ls:(int*int) list) (sample_str1:string array) (sample_str2:string array) (result_str:string) (last_color:string): string =
         match ls with
         | (x,y)::(x_next,y_next)::tl -> 
-          (let curr_string = append_string (x_next,y_next) (x,y) result_str sample_str1 sample_str2 in
-          lcs_ls_to_str ((x_next,y_next)::tl) sample_str1 sample_str2 curr_string)
+          (let curr_string, curr_color = color_label_words (x_next,y_next) (x,y) result_str sample_str1 sample_str2 last_color in
+          lcs_ls_to_color_str ((x_next,y_next)::tl) sample_str1 sample_str2 curr_string curr_color)
         | _ -> result_str
 
+        
 
-
-    let find_diff (str1:string) (str2:string) : ((int*int) list)*string =
-      let array1, array2 = string2array str1, string2array str2 in
+    let get_coordinate_seq (array1:string array) (array2:string array): (int * int) list =
       let coordinate_table = Hashtbl.create (module String) in
       let hash_ptr = ref coordinate_table in
       let g = search_whole array1 array2 [] hash_ptr in
       let tl = get_tail array1 array2 g in
-      let seq = (List.rev (get_sequence tl []))  in
-      let common_string = (lcs_ls_to_str seq array1 array2 "") in
-      print_string common_string;
-      (seq,common_string)
-          
+      (List.rev (get_sequence tl [])) 
+
+
+
+    let get_diff (str1:string) (str2:string) : string =
+      let array1, array2 = string2array str1, string2array str2 in
+      let seq = get_coordinate_seq array1 array2 in
+      let colored_common_string = (lcs_ls_to_color_str seq array1 array2 "" "dummy") in
+      print_string colored_common_string;
+      colored_common_string
+      
+    
+    
+    
+
+    
+
+
+
+      
+
+
+    
+      
 
 
       
