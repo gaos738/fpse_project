@@ -3,7 +3,7 @@
 [@@@warning "-32"]
 [@@@warning "-27"]
 open Core
-
+    (*BFS traverse for finding smallest edit path*)
     type bfs_node = Null | Node of {coordinate:int*int; parent:bfs_node; path:(int*int) list}
 
 
