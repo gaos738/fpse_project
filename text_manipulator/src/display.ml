@@ -4,9 +4,19 @@ open Core
 let disp_range=20;;
 
 
+module File_struct = struct
+
+  type section_type = Del | Common | Add | N [@@deriving compare]
+  type content_section = (section_type*string)
+
+end
+
+
+
 let file2string_ls (filepath: string) : string list = 
   In_channel.input_lines (In_channel.create filepath)
 ;;
+
 
 
 let get_range (lines: string list) (start_number: int) : string list =
@@ -15,6 +25,8 @@ let get_range (lines: string list) (start_number: int) : string list =
   hd2
 ;;
 
+
+
 let get_line_number (number_in: int) : string =
   let rec make_num_label number =
     if Core.equal (String.length number) 3
@@ -22,6 +34,8 @@ let get_line_number (number_in: int) : string =
     else make_num_label (" "^number)
   in make_num_label (string_of_int number_in)
 ;;
+
+
 
 let print_lines (str_lines: string list) (start_number: int) : unit =
   let rec print_lines_aux (lines: string list) (line_number: int) : unit = 
@@ -37,6 +51,7 @@ let print_lines (str_lines: string list) (start_number: int) : unit =
       print_lines_aux tl (line_number+1) 
   in print_lines_aux str_lines start_number
 ;;
+
 
 
 let display_content (arguments: string list) : unit =
