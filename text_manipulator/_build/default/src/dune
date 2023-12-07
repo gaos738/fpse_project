@@ -10,7 +10,17 @@
   (name diff_algo)
   (modules diff_algo)
   (libraries 
-    core)
+    core
+    display)
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+
+ (library
+  (name merge)
+  (modules merge)
+  (libraries 
+    core
+    diff_algo)
   (preprocess (pps ppx_jane bisect_ppx))
  )
 

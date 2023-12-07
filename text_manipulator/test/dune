@@ -1,0 +1,7 @@
+(test
+  (name test)
+  (libraries
+    diff_algo
+    merge
+    ounit2
+  )(preprocess (pps bisect_ppx ppx_jane)))
