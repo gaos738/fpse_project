@@ -1,0 +1,15 @@
+;
+(test
+  (name tests)
+  (libraries
+    core
+    ounit2
+    write
+    insert
+    delete
+    replace
+    undo
+    read
+  )
+  (preprocess (pps ppx_jane bisect_ppx))
+  )

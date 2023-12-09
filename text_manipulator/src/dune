@@ -1,3 +1,73 @@
+
+(library
+  (name read)
+  (modules read)
+  (libraries 
+    core
+    )
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+
+(library
+  (name undo)
+  (modules undo)
+  (libraries 
+    core
+    )
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+
+(library
+  (name replace)
+  (modules replace)
+  (libraries 
+    core
+    str
+    )
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+(library
+  (name write)
+  (modules write)
+  (libraries 
+    core
+    )
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+(library
+  (name insert)
+  (modules insert)
+  (libraries 
+    core
+    )
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+(library
+  (name delete)
+  (modules delete)
+  (libraries 
+    core
+    )
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+
+(library
+  (name repl)
+  (modules repl)
+  (libraries 
+    core
+    write
+    insert
+    delete
+    replace
+    undo
+    read
+    diff_algo
+    merge
+    )
+  (preprocess (pps ppx_jane bisect_ppx))
+ )
+
 (library
   (name display)
   (modules display)
@@ -33,6 +103,7 @@
     core
     core_unix.command_unix
     str
+    repl
     )
   (preprocess
     (pps ppx_jane)))

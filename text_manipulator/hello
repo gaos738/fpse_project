@@ -1,0 +1,10 @@
+OCaml Coding Information
+We are using OCaml version 5.0.0.
+Installing OCaml 5.0.0 and associated tools
+We require that you use the opam packaging system for installing OCaml and its 
+extensions. 
+Once you get opam installed and working, everything else should be easy to 
+install .. so the only hard part is the first step.
+For Linux or Mac see The OPAM install page for install instructions.
+For Mac users, the above requires Homebrew (a package manager for Linux-ish 
+libraries) so here is a more detailed suggestion o

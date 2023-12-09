@@ -3,6 +3,7 @@
   (deps 
     src/text_manipulator.ml
     src/display.ml
+    src/write.ml
     src/dune
   )
   (action
