@@ -8,7 +8,7 @@ This file is based on diff_algo with some modification. See diff_algo to get imp
 
 open Core
 open Diff_algo
-open Display
+open File_parse
 
 module String_merge_parser = struct
   include String_parser
@@ -44,27 +44,31 @@ module String_merge_parser = struct
     remove_unselected_content_aux "" in_ls
 end
 
-let merge_all (str1 : string) (str2 : string) : string =
-  let array1, array2 =
-    ( String_process.string2word_array str1,
-      String_process.string2word_array str2 )
-  in
-  let seq = get_coordinate_seq array1 array2 in
-  let content_ls =
-    String_merge_parser.coordinates_to_content_list seq array1 array2
-  in
-  let common_string = String_merge_parser.ls2no_color_str content_ls in
-  common_string
+module Graph_search_for_merge = struct
+  include Graph_search
+  include File_struct
 
-let disp_merge_all (filename1 : string) (filename2 : string) : unit =
+  let merge_all (str1 : string_file_content) (str2 : string_file_content) : string =
+    let array1, array2 =
+      ( String_process.string2word_array (content2string str1),
+        String_process.string2word_array (content2string str2) )
+    in
+    let seq = get_coordinate_seq array1 array2 in
+    let content_ls =
+      String_merge_parser.coordinates_to_content_list seq array1 array2
+    in
+    let common_string = String_merge_parser.ls2no_color_str content_ls in
+    common_string
+
+let disp_merge_all (filename1 : filename) (filename2 : filename) : unit =
   let file_content1 = File_struct.get_string_content filename1 in
   let file_content2 = File_struct.get_string_content filename2 in
-  print_string (merge_all file_content1 file_content2)
+  print_string (merge_all ( string2content file_content1) (string2content file_content2))
 
-let merge_selected (str1 : string) (str2 : string) (index : int) : string =
+let merge_selected (str1 : string_file_content) (str2 : string_file_content) (index : int) : string =
   let array1, array2 =
-    ( String_process.string2word_array str1,
-      String_process.string2word_array str2 )
+    ( String_process.string2word_array (content2string str1),
+      String_process.string2word_array (content2string str2) )
   in
   let seq = get_coordinate_seq array1 array2 in
   let all_content_ls =
@@ -76,7 +80,8 @@ let merge_selected (str1 : string) (str2 : string) (index : int) : string =
   let result_string = String_merge_parser.ls2no_color_str content_ls in
   result_string
 
-let disp_merge_selected (filename1 : string) (filename2 : string) (index : int) : unit =
+let disp_merge_selected (filename1 : filename) (filename2 : filename) (index : int) : unit =
   let file_content1 = File_struct.get_string_content filename1 in
   let file_content2 = File_struct.get_string_content filename2 in
-  print_string (merge_selected file_content1 file_content2 index)
+  print_string (merge_all ( string2content file_content1) (string2content file_content2))
+end

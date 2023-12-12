@@ -2,7 +2,7 @@
   (target text_manipulator.zip)
   (deps 
     src/text_manipulator.ml
-    src/display.ml
+    src/file_parse.ml
     src/write.ml
     src/dune
   )

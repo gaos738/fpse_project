@@ -5,7 +5,7 @@ open Replace
 open Undo
 open Read
 open Diff_algo
-open Display
+open File_parse
 open Merge
 (* open Arg *)
 
@@ -130,28 +130,28 @@ let parse_command command =
 
   | Diff ->
     let diff_content = File_struct.get_string_content (!diff_path) in
-    let () = print_string diff_content in
+    (*let () = print_string diff_content in*)
     let input_content = File_struct.ls2str !input_lines in
-    let () = print_string input_content in
-    let diff_res = get_diff input_content diff_content in
+    (*let () = print_string input_content in*)
+    let diff_res = Graph_search.get_diff (Graph_search.string2content input_content) (Graph_search.string2content diff_content) in
     print_endline diff_res
 
   | Mergeall ->
     let mergeall_content = String.concat "\n" (read mergeall_path) in
     let input_content = String.concat "\n" !input_lines in
     if !merge_disp = "-disp" then
-      disp_merge_all input_content mergeall_content
+      Graph_search_for_merge.disp_merge_all (Graph_search_for_merge.string2filename input_content) (Graph_search_for_merge.string2filename mergeall_content)
     else
-      let mergeall_res = merge_all input_content mergeall_content in
+      let mergeall_res = Graph_search_for_merge.merge_all (Graph_search_for_merge.string2content input_content) (Graph_search_for_merge.string2content mergeall_content) in
       update_lines (Str.split (Str.regexp "[\n]+") mergeall_res) input_lines input_history;
 
   | MergeSelect ->
     let mergeall_content = String.concat "\n" (read mergeall_path) in
     let input_content = String.concat "\n" !input_lines in
     if !merge_disp = "-disp" then
-      disp_merge_selected input_content mergeall_content !merge_index
+      Graph_search_for_merge.disp_merge_selected (Graph_search_for_merge.string2filename input_content) (Graph_search_for_merge.string2filename mergeall_content) !merge_index
     else
-      let mergeall_res = merge_selected input_content mergeall_content !merge_index in
+      let mergeall_res = Graph_search_for_merge.merge_selected (Graph_search_for_merge.string2content input_content) (Graph_search_for_merge.string2content mergeall_content) !merge_index in
       update_lines (Str.split (Str.regexp "[\n]+") mergeall_res) input_lines input_history;
 
   | Unknow -> 
