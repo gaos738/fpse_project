@@ -47,6 +47,12 @@ module File_struct = struct
     in
     string_content
 
+  let ls2str (content : file_content) : string =
+    let string_content =
+      List.fold ~f:(fun acc line -> acc ^ line ^ " \n") ~init:"" content
+    in
+    string_content
+
   let get_string_ls_content (filepath : filename) : string list =
     let str_list_content = filepath |> file2string_ls |> content_to_str_ls in
     str_list_content

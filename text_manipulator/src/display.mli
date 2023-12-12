@@ -12,4 +12,6 @@ module File_struct : sig
 
   val get_string_ls_content : filename -> string list
 
+  val ls2str : file_content -> string
+
 end

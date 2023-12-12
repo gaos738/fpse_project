@@ -129,8 +129,10 @@ let parse_command command =
     File_struct.display_content !input_lines;
 
   | Diff ->
-    let diff_content = String.concat " \n " (read diff_path) in
-    let input_content = String.concat " \n " !input_lines in
+    let diff_content = File_struct.get_string_content (!diff_path) in
+    let () = print_string diff_content in
+    let input_content = File_struct.ls2str !input_lines in
+    let () = print_string input_content in
     let diff_res = get_diff input_content diff_content in
     print_endline diff_res
 
