@@ -1,0 +1,12 @@
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Start test project Tests:0:insert tests:0:insert1.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Test project Tests:0:insert tests:0:insert1 is successful.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: End test project Tests:0:insert tests:0:insert1.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Start test project Tests:2:replace tests:0:replace.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Test project Tests:2:replace tests:0:replace is successful.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: End test project Tests:2:replace tests:0:replace.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Start test project Tests:4:Diff test:0:string parser test.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Test project Tests:4:Diff test:0:string parser test is successful.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: End test project Tests:4:Diff test:0:string parser test.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Start test project Tests:4:Diff test:2:diff test.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: Test project Tests:4:Diff test:2:diff test is successful.
+2023-12-16T08:57:26+00:00 Shang-VirtualBox#01 I: End test project Tests:4:Diff test:2:diff test.

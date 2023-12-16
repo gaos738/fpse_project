@@ -10,6 +10,8 @@
     replace
     undo
     read
+    diff_algo
+    merge
   )
   (preprocess (pps ppx_jane bisect_ppx))
   )

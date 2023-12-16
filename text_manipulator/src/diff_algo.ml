@@ -11,12 +11,18 @@ Reference:https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
 open Core
 open File_parse
 
+exception Invalid_section_type
+
+type word_coordinate = (int * int)
+
+let int_tuple2word_coordinate (tup:(int * int)) : word_coordinate = tup
+let int_tuple_ls2word_coordinate_ls (tup_ls:(int * int) list) : word_coordinate list = tup_ls
 
 module String_parser = struct
   type section_type = Del | Common | Add | N [@@deriving compare]
   type content_section = section_type * string
 
-  let match_label_string (curr : int * int) (prev : int * int)
+  let match_label_string (curr : word_coordinate) (prev : word_coordinate)
       (sect_ls : content_section list) (str1 : string array)
       (str2 : string array) : content_section list =
     let x, y = curr in
@@ -57,10 +63,10 @@ module String_parser = struct
     in
     combine_section_aux [] sec_ls (N, "")
 
-  let coordinates_to_content_list (ls_in : (int * int) list)
+  let coordinates_to_content_list (ls_in : word_coordinate list)
       (sample_str1_in : string array) (sample_str2_in : string array) :
       content_section list =
-    let rec aux (ls : (int * int) list) (sample_str1 : string array)
+    let rec aux (ls : word_coordinate list) (sample_str1 : string array)
         (sample_str2 : string array) (result_ls : content_section list) :
         content_section list =
       match ls with
@@ -85,7 +91,7 @@ module String_parser = struct
           | Common -> sect_ls2string_aux tl (checked ^ "\027[30m" ^ v)
           | Del -> sect_ls2string_aux tl (checked ^ "\027[31m" ^ v)
           | Add -> sect_ls2string_aux tl (checked ^ "\027[32m" ^ v)
-          | N -> failwith "invalid type")
+          | N -> raise Invalid_section_type)
     in
     sect_ls2string_aux ls_in ""
 end
@@ -95,7 +101,7 @@ module String_process = struct
     String.filter str ~f:(fun char -> not (Char.equal char ' '))
 
   let str_equal_at_index (str1 : string array) (str2 : string array)
-      (coordinate : int * int) : bool =
+      (coordinate : word_coordinate) : bool =
     let x, y = coordinate in
     let x_content = rm_whitespace (Array.get str1 x) in
     let y_content = rm_whitespace (Array.get str2 y) in
@@ -133,9 +139,9 @@ module Graph_search = struct
   type bfs_node =
   | Null
   | Node of {
-      coordinate : int * int;
+      coordinate : word_coordinate;
       parent : bfs_node;
-      path : (int * int) list;
+      path : word_coordinate list;
     }
 
   type string_file_content = string
@@ -169,14 +175,14 @@ module Graph_search = struct
 
   (*Check if a point in graph is valid(inside the graph)*)
   let valid_point (str1 : string array) (str2 : string array)
-      (coordinate : int * int) : bool =
+      (coordinate : word_coordinate) : bool =
     let x, y = coordinate in
     Array.length str1 >= x && x >= 0 && Array.length str2 >= y && y >= 0
 
   (*Check if a point can go diagonal path in the graph*)
   let rec diagonal_path (str1 : string array) (str2 : string array)
-      (coordinate : int * int) (path : (int * int) list) :
-      (int * int) * (int * int) list =
+      (coordinate : word_coordinate) (path : word_coordinate list) :
+      word_coordinate * word_coordinate list =
     let x, y = coordinate in
     if
       valid_point str1 str2 (x + 1, y + 1)
@@ -192,7 +198,7 @@ module Graph_search = struct
 
   (*Append the valid point into current BFS layer*)
   let append_point (str1 : string array) (str2 : string array)
-      (common_parent : bfs_node) (coordinate : int * int)
+      (common_parent : bfs_node) (coordinate : word_coordinate)
       (hashtable : (string, int) Hashtbl_intf.Hashtbl.t ref) : bfs_node option =
     let x, y = coordinate in
     match valid_point str1 str2 (x, y) with
@@ -274,8 +280,8 @@ module Graph_search = struct
         tail
 
   (*Use last point to search back the "linked list" and find the whole path from begining*)
-  let rec get_sequence (tail : bfs_node) (sequence : (int * int) list) :
-      (int * int) list =
+  let rec get_sequence (tail : bfs_node) (sequence : word_coordinate list) :
+    word_coordinate list =
     match tail with
     | Null -> sequence
     | Node { coordinate = x, y; parent = next_tail; path = seq } ->
@@ -283,7 +289,7 @@ module Graph_search = struct
 
   (*Get the sequence of del, add or common strings*)
   let get_coordinate_seq (array1 : string array) (array2 : string array) :
-      (int * int) list =
+    word_coordinate list =
     let coordinate_table = Hashtbl.create (module String) in
     let hash_ptr = ref coordinate_table in
     let g = search_whole array1 array2 [] hash_ptr in

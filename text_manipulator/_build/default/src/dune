@@ -106,4 +106,4 @@
     repl
     )
   (preprocess
-    (pps ppx_jane)))
+    (pps ppx_jane bisect_ppx)))

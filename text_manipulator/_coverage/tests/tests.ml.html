@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>tests.ml &mdash; Coverage report</title>
+    <meta name="description" content="100.00% coverage in tests/tests.ml">
+    <link rel="stylesheet" href="../coverage.css"/>
+    <script src="../highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="../index.html">
+          <span class="dirname">tests/</span>tests.ml
+        </a>
+      </h1>
+      <h2>100.00%</h2>
+    </div>
+    <div id="navbar">
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span > </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span > </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span > </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span class="visited"> </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span > </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span class="visited"> </span>
+<a id="L17"></a><span > </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
+<a id="L21"></a><span > </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span > </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span class="visited"> </span>
+<a id="L27"></a><span > </span>
+<a id="L28"></a><span > </span>
+<a id="L29"></a><span class="visited"> </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span > </span>
+<a id="L32"></a><span > </span>
+<a id="L33"></a><span class="visited"> </span>
+<a id="L34"></a><span > </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span class="visited"> </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span class="visited"> </span>
+<a id="L39"></a><span class="visited"> </span>
+<a id="L40"></a><span class="visited"> </span>
+<a id="L41"></a><span > </span>
+<a id="L42"></a><span > </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span class="visited"> </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span class="visited"> </span>
+<a id="L47"></a><span > </span>
+<a id="L48"></a><span class="visited"> </span>
+<a id="L49"></a><span > </span>
+<a id="L50"></a><span > </span>
+<a id="L51"></a><span > </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span > </span>
+<a id="L54"></a><span class="visited"> </span>
+<a id="L55"></a><span class="visited"> </span>
+<a id="L56"></a><span > </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span class="visited"> </span>
+<a id="L59"></a><span > </span>
+<a id="L60"></a><span > </span>
+<a id="L61"></a><span > </span>
+<a id="L62"></a><span > </span>
+<a id="L63"></a><span > </span>
+<a id="L64"></a><span > </span>
+<a id="L65"></a><span > </span>
+<a id="L66"></a><span class="visited"> </span>
+<a id="L67"></a><span class="visited"> </span>
+<a id="L68"></a><span class="visited"> </span>
+<a id="L69"></a><span class="visited"> </span>
+<a id="L70"></a><span class="visited"> </span>
+<a id="L71"></a><span class="visited"> </span>
+<a id="L72"></a><span class="visited"> </span>
+<a id="L73"></a><span class="visited"> </span>
+<a id="L74"></a><span class="visited"> </span>
+<a id="L75"></a><span class="visited"> </span>
+<a id="L76"></a><span class="visited"> </span>
+<a id="L77"></a><span class="visited"> </span>
+<a id="L78"></a><span > </span>
+<a id="L79"></a><span > </span>
+<a id="L80"></a><span class="visited"> </span>
+<a id="L81"></a><span > </span>
+<a id="L82"></a><span > </span>
+<a id="L83"></a><span > </span>
+<a id="L84"></a><span class="visited"> </span>
+<a id="L85"></a><span class="visited"> </span>
+<a id="L86"></a><span > </span>
+<a id="L87"></a><span class="visited"> </span>
+<a id="L88"></a><span class="visited"> </span>
+<a id="L89"></a><span > </span>
+<a id="L90"></a><span class="visited"> </span>
+<a id="L91"></a><span class="visited"> </span>
+<a id="L92"></a><span > </span>
+<a id="L93"></a><span class="visited"> </span>
+<a id="L94"></a><span class="visited"> </span>
+<a id="L95"></a><span > </span>
+<a id="L96"></a><span > </span>
+<a id="L97"></a><span > </span>
+<a id="L98"></a><span > </span>
+<a id="L99"></a><span class="visited"> </span>
+<a id="L100"></a><span class="visited"> </span>
+<a id="L101"></a><span class="visited"> </span>
+<a id="L102"></a><span class="visited"> </span>
+<a id="L103"></a><span > </span>
+<a id="L104"></a><span > </span>
+<a id="L105"></a><span > </span>
+<a id="L106"></a><span > </span>
+<a id="L107"></a><span class="visited"> </span>
+<a id="L108"></a><span > </span>
+<a id="L109"></a><span > </span>
+<a id="L110"></a><span > </span>
+<a id="L111"></a><span > </span>
+<a id="L112"></a><span > </span>
+<a id="L113"></a><span > </span>
+<a id="L114"></a><span > </span>
+<a id="L115"></a><span > </span>
+<a id="L116"></a><span class="visited"> </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1">  1</a>
+<a href="#L2">  2</a>
+<a href="#L3">  3</a>
+<a href="#L4">  4</a>
+<a href="#L5">  5</a>
+<a href="#L6">  6</a>
+<a href="#L7">  7</a>
+<a href="#L8">  8</a>
+<a href="#L9">  9</a>
+<a href="#L10"> 10</a>
+<a href="#L11"> 11</a>
+<a href="#L12"> 12</a>
+<a href="#L13"> 13</a>
+<a href="#L14"> 14</a>
+<a href="#L15"> 15</a>
+<a href="#L16"> 16</a>
+<a href="#L17"> 17</a>
+<a href="#L18"> 18</a>
+<a href="#L19"> 19</a>
+<a href="#L20"> 20</a>
+<a href="#L21"> 21</a>
+<a href="#L22"> 22</a>
+<a href="#L23"> 23</a>
+<a href="#L24"> 24</a>
+<a href="#L25"> 25</a>
+<a href="#L26"> 26</a>
+<a href="#L27"> 27</a>
+<a href="#L28"> 28</a>
+<a href="#L29"> 29</a>
+<a href="#L30"> 30</a>
+<a href="#L31"> 31</a>
+<a href="#L32"> 32</a>
+<a href="#L33"> 33</a>
+<a href="#L34"> 34</a>
+<a href="#L35"> 35</a>
+<a href="#L36"> 36</a>
+<a href="#L37"> 37</a>
+<a href="#L38"> 38</a>
+<a href="#L39"> 39</a>
+<a href="#L40"> 40</a>
+<a href="#L41"> 41</a>
+<a href="#L42"> 42</a>
+<a href="#L43"> 43</a>
+<a href="#L44"> 44</a>
+<a href="#L45"> 45</a>
+<a href="#L46"> 46</a>
+<a href="#L47"> 47</a>
+<a href="#L48"> 48</a>
+<a href="#L49"> 49</a>
+<a href="#L50"> 50</a>
+<a href="#L51"> 51</a>
+<a href="#L52"> 52</a>
+<a href="#L53"> 53</a>
+<a href="#L54"> 54</a>
+<a href="#L55"> 55</a>
+<a href="#L56"> 56</a>
+<a href="#L57"> 57</a>
+<a href="#L58"> 58</a>
+<a href="#L59"> 59</a>
+<a href="#L60"> 60</a>
+<a href="#L61"> 61</a>
+<a href="#L62"> 62</a>
+<a href="#L63"> 63</a>
+<a href="#L64"> 64</a>
+<a href="#L65"> 65</a>
+<a href="#L66"> 66</a>
+<a href="#L67"> 67</a>
+<a href="#L68"> 68</a>
+<a href="#L69"> 69</a>
+<a href="#L70"> 70</a>
+<a href="#L71"> 71</a>
+<a href="#L72"> 72</a>
+<a href="#L73"> 73</a>
+<a href="#L74"> 74</a>
+<a href="#L75"> 75</a>
+<a href="#L76"> 76</a>
+<a href="#L77"> 77</a>
+<a href="#L78"> 78</a>
+<a href="#L79"> 79</a>
+<a href="#L80"> 80</a>
+<a href="#L81"> 81</a>
+<a href="#L82"> 82</a>
+<a href="#L83"> 83</a>
+<a href="#L84"> 84</a>
+<a href="#L85"> 85</a>
+<a href="#L86"> 86</a>
+<a href="#L87"> 87</a>
+<a href="#L88"> 88</a>
+<a href="#L89"> 89</a>
+<a href="#L90"> 90</a>
+<a href="#L91"> 91</a>
+<a href="#L92"> 92</a>
+<a href="#L93"> 93</a>
+<a href="#L94"> 94</a>
+<a href="#L95"> 95</a>
+<a href="#L96"> 96</a>
+<a href="#L97"> 97</a>
+<a href="#L98"> 98</a>
+<a href="#L99"> 99</a>
+<a href="#L100">100</a>
+<a href="#L101">101</a>
+<a href="#L102">102</a>
+<a href="#L103">103</a>
+<a href="#L104">104</a>
+<a href="#L105">105</a>
+<a href="#L106">106</a>
+<a href="#L107">107</a>
+<a href="#L108">108</a>
+<a href="#L109">109</a>
+<a href="#L110">110</a>
+<a href="#L111">111</a>
+<a href="#L112">112</a>
+<a href="#L113">113</a>
+<a href="#L114">114</a>
+<a href="#L115">115</a>
+<a href="#L116">116</a>
+</pre>
+<pre><code class="ocaml">(* open Core *)
+open OUnit2
+open Insert
+open Delete
+open Replace
+open Undo
+(*open Merge*)
+open Diff_algo
+
+
+let insert_test_1 _ =
+  <span data-count="1">i</span>nsert_line := 0;
+  insert_col := 0;
+  insert_A := "123";
+  let res = insert_string "000" in
+  <span data-count="1">a</span>ssert_equal res "123000"
+
+let delete_test_1 _ =
+  <span data-count="1">d</span>elete_line := 0;
+  delete_col := 0;
+  (* delete_A := "123"; *)
+  let res = delete_string "123" in
+  <span data-count="1">a</span>ssert_equal res "23"
+
+let replace_test_1 _ =
+  <span data-count="1">r</span>eplace_A := "123";
+  replace_B := "321";
+  let res = replace_string "dsfj123jkljfkldsajflkajds" in
+  <span data-count="1">a</span>ssert_equal res "dsfj321jkljfkldsajflkajds"
+
+
+let undo_test_1 _ = 
+  <span data-count="1">l</span>et input_lines = ref [] in
+  let input_history = ref [] in
+  update_lines ["123"] input_lines input_history;
+  <span data-count="1">u</span>pdate_lines ["321"] input_lines input_history;
+  <span data-count="1">u</span>pdate_lines ["456"] input_lines input_history;
+  <span data-count="1">u</span>pdate_lines ["789"] input_lines input_history;
+  <span data-count="1">l</span>et _ = undo input_lines input_history in
+  <span data-count="1">a</span>ssert_equal !input_lines ["456"]
+
+(*Diff tests*)
+let string_parser_test _ =
+  <span data-count="1">a</span>ssert_equal [ (Diff_algo.String_parser.Common, "bc") ]
+  @@ String_parser.coordinates_to_content_lis<span data-count="1">t</span>
+      (int_tuple_ls2word_coordinate_l<span data-count="1">s</span> [ (1, 1); (2, 2); (3, 3) ])
+       [| "a"; "b"; "c" |] [| "d"; "e"; "f" |];
+  <span data-count="1">a</span>ssert_equal
+    [
+      (Diff_algo.String_parser.Add, "e");
+      (Diff_algo.String_parser.Del, "b");
+      (Diff_algo.String_parser.Common, "c");
+    ]
+  @@ String_parser.coordinates_to_content_lis<span data-count="1">t</span>
+    (int_tuple_ls2word_coordinate_l<span data-count="1">s</span> [ (1, 1); (1, 2); (2, 2); (3, 3) ])
+       [| "a"; "b"; "c"; "d" |] [| "d"; "e"; "f"; "g" |];
+  <span data-count="1">a</span>ssert_equal "\027[32me\027[31mb\027[30mc"
+  @@ String_parser.sect_ls2strin<span data-count="1">g</span>
+       [
+         (Diff_algo.String_parser.Add, "e");
+         (Diff_algo.String_parser.Del, "b");
+         (Diff_algo.String_parser.Common, "c");
+       ]
+
+let string_process_test _ =
+  <span data-count="1">a</span>ssert_equal "aaaa" @@ String_process.rm_whitespac<span data-count="1">e</span> " a a a a ";
+  <span data-count="1">a</span>ssert_equal true
+  @@ String_process.str_equal_at_inde<span data-count="1">x</span> [| "ab"; "b"; "c" |]
+       [| "ab "; "b "; "d " |] (int_tuple2word_coordinat<span data-count="1">e</span> (0, 0));
+  <span data-count="1">a</span>ssert_equal false
+  @@ String_process.str_equal_at_inde<span data-count="1">x</span> [| "ab"; "b"; "c" |]
+       [| "ab "; "b "; "d " |] (int_tuple2word_coordinat<span data-count="1">e</span>(2, 2));
+  <span data-count="1">a</span>ssert_equal ("a", "bcd") @@ String_process.string_h<span data-count="1">d</span> "abcd";
+  <span data-count="1">a</span>ssert_equal [| " "; "a "; "b "; "c" |]
+  @@ String_process.string2word_arra<span data-count="1">y</span> " a b c";
+  <span data-count="1">a</span>ssert_equal [| " "; "i "; "am "; "groot "; "! " |]
+  @@ String_process.string2word_arra<span data-count="1">y</span> " i am groot ! "
+
+  let diff_test _ =
+    <span data-count="1">a</span>ssert_equal "\027[31ma \027[30mb \027[32mc \027[30md " @@ Graph_search.get_dif<span data-count="1">f</span> (Graph_search.string2conten<span data-count="1">t</span> "a b d ") (Graph_search.string2conten<span data-count="1">t</span> "b c d ")
+
+
+
+let insert_tests = "insert tests" &gt;<span data-count="3">:</span> test_lis<span data-count="3">t</span> [
+  "insert1" &gt;:<span data-count="3">:</span> insert_test_1;
+]
+let delete_tests = "delete tests" &gt;<span data-count="3">:</span> test_lis<span data-count="3">t</span> [
+  "delete" &gt;:<span data-count="3">:</span> delete_test_1;
+]
+let replace_tests = "replace tests" &gt;<span data-count="3">:</span> test_lis<span data-count="3">t</span> [
+  "replace" &gt;:<span data-count="3">:</span> replace_test_1;
+]
+let undo_tests = "undo tests" &gt;<span data-count="3">:</span> test_lis<span data-count="3">t</span> [
+  "undo" &gt;:<span data-count="3">:</span> undo_test_1;
+]
+
+let diff_tests =
+  "Diff test"
+  &gt;::<span data-count="3">:</span> [
+         "string parser test" &gt;:<span data-count="3">:</span> string_parser_test;
+         "string process test" &gt;:<span data-count="3">:</span> string_process_test;
+         "diff test" &gt;:<span data-count="3">:</span> diff_test;
+       ]
+
+
+
+let series = "project Tests" &gt;::<span data-count="3">:</span> [
+    insert_tests;
+    delete_tests;
+    replace_tests;
+    undo_tests;
+    diff_tests;
+  ]
+
+let () = 
+  run_test_tt_mai<span data-count="1">n</span> series
+</code></pre>
+      </div>
+    </div>
+    <script src="../coverage.js"></script>
+  </body>
+</html>
