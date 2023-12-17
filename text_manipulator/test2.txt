@@ -1,0 +1,2 @@
+let f _ = raise @@ Boom "keyboard on fire" ;;
+let g () ;;
