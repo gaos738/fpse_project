@@ -35,11 +35,11 @@ To search <A> inside APP:
 ```
 To insert <A> at line x and column y inside APP:
 ```
--insert <A> x y
+-insert x y <A>
 ```
 To delete <A> at line x and column y inside APP:
 ```
--delete <A> x y
+-delete x y <A>
 ```
 To show diff between file <file_path> with current editing file inside APP:
 ```
@@ -56,7 +56,10 @@ To flush all changes of current edited content into file inside APP:
 
 ## Reference
 https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
-
 An O(ND) Difference Algorithm and Its Variations∗ EUGENE W. MYERS
+File Manipulation · OCAML documentation. (n.d.). OCaml. https://ocaml.org/docs/file-manipulation
+OCaml library : Arg. (n.d.). https://v2.ocaml.org/api/Arg.html
+OCaml - The toplevel system or REPL (ocaml). (n.d.). https://v2.ocaml.org/manual/toplevel.html
+
 
 
