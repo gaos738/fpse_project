@@ -4,14 +4,10 @@
   (libraries
     core
     ounit2
-    write
-    insert
-    delete
-    replace
-    undo
-    read
+    basic_feature
     diff_algo
     merge
+
   )
   (preprocess (pps ppx_jane bisect_ppx))
   )

@@ -1,5 +1,3 @@
-
-
 module File_struct : sig
     
   type filename = string
@@ -8,7 +6,11 @@ module File_struct : sig
 
   val string2filename : string -> filename
 
+  val file2string_ls : filename -> file_content
+
   val display_content : arguments -> unit
+
+  val get_line_number : int -> string
 
   val get_string_content : filename -> string
 

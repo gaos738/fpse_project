@@ -3,7 +3,7 @@
   (deps 
     src/text_manipulator.ml
     src/file_parse.ml
-    src/write.ml
+    src/basic_feature.ml
     src/dune
   )
   (action

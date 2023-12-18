@@ -1,8 +1,4 @@
-
 open Repl
 
-
-  let run () = 
-    start_repl ()
-  
-  let () = run ()
+let run () = start_repl ()
+let () = run ()

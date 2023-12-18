@@ -13,15 +13,19 @@ open File_parse
 
 exception Invalid_section_type
 
-type word_coordinate = (int * int)
+type word_coordinate = int * int
 
-let int_tuple2word_coordinate (tup:(int * int)) : word_coordinate = tup
-let int_tuple_ls2word_coordinate_ls (tup_ls:(int * int) list) : word_coordinate list = tup_ls
+let int_tuple2word_coordinate (tup : int * int) : word_coordinate = tup
+
+let int_tuple_ls2word_coordinate_ls (tup_ls : (int * int) list) :
+    word_coordinate list =
+  tup_ls
 
 module String_parser = struct
   type section_type = Del | Common | Add | N [@@deriving compare]
   type content_section = section_type * string
 
+  (* Getting words with coordinates, and label it with word to "add", to "delete" or common word between files *)
   let match_label_string (curr : word_coordinate) (prev : word_coordinate)
       (sect_ls : content_section list) (str1 : string array)
       (str2 : string array) : content_section list =
@@ -36,8 +40,9 @@ module String_parser = struct
     else if Core.equal x x_prev && Core.equal y (y_prev + 1) then
       let curr_str = Array.get str2 (y - 1) in
       sect_ls @ [ (Add, curr_str) ]
-    else failwith "expected string"
+    else assert false
 
+  (* Remove duplicate whitespace and other format "errors" during processing the string *)
   let sanitize (sec_ls : content_section list) : content_section list =
     let rec sanitize_aux (checked : content_section list)
         (unchecked : content_section list) : content_section list =
@@ -49,6 +54,7 @@ module String_parser = struct
     in
     sanitize_aux [] sec_ls
 
+  (* Combine consective word with same label(add,delete,common) *)
   let combine_section (sec_ls : content_section list) : content_section list =
     let rec combine_section_aux (checked : content_section list)
         (unchecked : content_section list) (last : content_section) :
@@ -63,6 +69,7 @@ module String_parser = struct
     in
     combine_section_aux [] sec_ls (N, "")
 
+  (* Convert a list of coordinates to list of words with label *)
   let coordinates_to_content_list (ls_in : word_coordinate list)
       (sample_str1_in : string array) (sample_str2_in : string array) :
       content_section list =
@@ -81,6 +88,7 @@ module String_parser = struct
     let unsanitized = aux ls_in sample_str1_in sample_str2_in [] in
     unsanitized |> combine_section |> sanitize
 
+  (* Convert a list labeled words to list of words *)
   let sect_ls2string (ls_in : content_section list) : string =
     let rec sect_ls2string_aux (unchecked : content_section list)
         (checked : string) : string =
@@ -97,9 +105,11 @@ module String_parser = struct
 end
 
 module String_process = struct
+  (* Remove whitespace *)
   let rm_whitespace (str : string) : string =
     String.filter str ~f:(fun char -> not (Char.equal char ' '))
 
+  (* Equality check at index *)
   let str_equal_at_index (str1 : string array) (str2 : string array)
       (coordinate : word_coordinate) : bool =
     let x, y = coordinate in
@@ -114,6 +124,7 @@ module String_process = struct
     in
     (str_hd, str_tl)
 
+  (* Convert string to list of words *)
   let rec string2word_list (input_str : string) (curr_ls : string list)
       (curr_word : string) (last_ws : bool) : string list =
     match String.equal input_str "" with
@@ -127,6 +138,7 @@ module String_process = struct
         | false ->
             string2word_list str_tl curr_ls (curr_word ^ str_hd) is_whitespace)
 
+  (* Convert string to word array *)
   let string2word_array (input_l : string) : string array =
     let string_ls = string2word_list input_l [] "" true in
     let reverse = List.rev string_ls in
@@ -135,22 +147,20 @@ end
 
 module Graph_search = struct
   include File_struct
+
   (*BFS traverse for finding smallest edit path*)
   type bfs_node =
-  | Null
-  | Node of {
-      coordinate : word_coordinate;
-      parent : bfs_node;
-      path : word_coordinate list;
-    }
+    | Null
+    | Node of {
+        coordinate : word_coordinate;
+        parent : bfs_node;
+        path : word_coordinate list;
+      }
 
   type string_file_content = string
 
-  let content2string (content_in : string_file_content) : string = 
-    content_in
-
-  let string2content (content_in : string) : string_file_content = 
-    content_in
+  let content2string (content_in : string_file_content) : string = content_in
+  let string2content (content_in : string) : string_file_content = content_in
 
   (*Check if the graph serarch should stop*)
   let is_last_point ~(str1 : string array) ~(str2 : string array)
@@ -190,8 +200,8 @@ module Graph_search = struct
     then diagonal_path str1 str2 (x + 1, y + 1) ((x, y) :: path)
     else (coordinate, path)
 
-  let add_map (hashtable : (string, int) Hashtbl_intf.Hashtbl.t ref) (k : string)
-      (v : int) : unit =
+  let add_map (hashtable : (string, int) Hashtbl_intf.Hashtbl.t ref)
+      (k : string) (v : int) : unit =
     match Hashtbl.add !hashtable ~key:k ~data:v with
     | `Duplicate -> ()
     | `Ok -> ()
@@ -252,8 +262,8 @@ module Graph_search = struct
   (*Search whole graph*)
   let rec search_whole (str1 : string array) (str2 : string array)
       (graph : bfs_node list list)
-      (hashtable : (string, int) Hashtbl_intf.Hashtbl.t ref) : bfs_node list list
-      =
+      (hashtable : (string, int) Hashtbl_intf.Hashtbl.t ref) :
+      bfs_node list list =
     if stop_at_layer str1 str2 graph then graph
     else
       match graph with
@@ -281,7 +291,7 @@ module Graph_search = struct
 
   (*Use last point to search back the "linked list" and find the whole path from begining*)
   let rec get_sequence (tail : bfs_node) (sequence : word_coordinate list) :
-    word_coordinate list =
+      word_coordinate list =
     match tail with
     | Null -> sequence
     | Node { coordinate = x, y; parent = next_tail; path = seq } ->
@@ -289,14 +299,15 @@ module Graph_search = struct
 
   (*Get the sequence of del, add or common strings*)
   let get_coordinate_seq (array1 : string array) (array2 : string array) :
-    word_coordinate list =
+      word_coordinate list =
     let coordinate_table = Hashtbl.create (module String) in
     let hash_ptr = ref coordinate_table in
     let g = search_whole array1 array2 [] hash_ptr in
     let tl = get_tail array1 array2 g in
     List.rev (get_sequence tl [])
 
-  let get_diff (str1 : string_file_content) (str2 : string_file_content) : string =
+  let get_diff (str1 : string_file_content) (str2 : string_file_content) :
+      string =
     let array1, array2 =
       ( String_process.string2word_array (content2string str1),
         String_process.string2word_array (content2string str2) )
@@ -311,6 +322,9 @@ module Graph_search = struct
   let disp_file_diff (filename1 : filename) (filename2 : filename) : unit =
     let file_content1 = File_struct.get_string_content filename1 in
     let file_content2 = File_struct.get_string_content filename2 in
+    print_string file_content1;
+    print_string file_content2;
+
     print_string (get_diff file_content1 file_content2)
 end
 

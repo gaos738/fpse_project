@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>merge.ml &mdash; Coverage report</title>
+    <meta name="description" content="71.43% coverage in src/merge.ml">
+    <link rel="stylesheet" href="../coverage.css"/>
+    <script src="../highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="../index.html">
+          <span class="dirname">src/</span>merge.ml
+        </a>
+      </h1>
+      <h2>71.43%</h2>
+    </div>
+    <div id="navbar">
+      <span class="unvisited" style="bottom:9.26%"></span>
+      <span class="unvisited" style="bottom:7.41%"></span>
+      <span class="unvisited" style="bottom:5.56%"></span>
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span > </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span > </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span > </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span > </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span class="visited"> </span>
+<a id="L20"></a><span class="visited"> </span>
+<a id="L21"></a><span class="visited"> </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span class="visited"> </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span > </span>
+<a id="L27"></a><span > </span>
+<a id="L28"></a><span > </span>
+<a id="L29"></a><span > </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span > </span>
+<a id="L32"></a><span > </span>
+<a id="L33"></a><span > </span>
+<a id="L34"></a><span > </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span > </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span class="visited"> </span>
+<a id="L39"></a><span class="visited"> </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span > </span>
+<a id="L42"></a><span class="visited"> </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span > </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span class="visited"> </span>
+<a id="L47"></a><span > </span>
+<a id="L48"></a><span > </span>
+<a id="L49"></a><span class="unvisited"> </span>
+<a id="L50"></a><span class="unvisited"> </span>
+<a id="L51"></a><span class="unvisited"> </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span > </span>
+<a id="L54"></a><span > </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1"> 1</a>
+<a href="#L2"> 2</a>
+<a href="#L3"> 3</a>
+<a href="#L4"> 4</a>
+<a href="#L5"> 5</a>
+<a href="#L6"> 6</a>
+<a href="#L7"> 7</a>
+<a href="#L8"> 8</a>
+<a href="#L9"> 9</a>
+<a href="#L10">10</a>
+<a href="#L11">11</a>
+<a href="#L12">12</a>
+<a href="#L13">13</a>
+<a href="#L14">14</a>
+<a href="#L15">15</a>
+<a href="#L16">16</a>
+<a href="#L17">17</a>
+<a href="#L18">18</a>
+<a href="#L19">19</a>
+<a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
+<a href="#L29">29</a>
+<a href="#L30">30</a>
+<a href="#L31">31</a>
+<a href="#L32">32</a>
+<a href="#L33">33</a>
+<a href="#L34">34</a>
+<a href="#L35">35</a>
+<a href="#L36">36</a>
+<a href="#L37">37</a>
+<a href="#L38">38</a>
+<a href="#L39">39</a>
+<a href="#L40">40</a>
+<a href="#L41">41</a>
+<a href="#L42">42</a>
+<a href="#L43">43</a>
+<a href="#L44">44</a>
+<a href="#L45">45</a>
+<a href="#L46">46</a>
+<a href="#L47">47</a>
+<a href="#L48">48</a>
+<a href="#L49">49</a>
+<a href="#L50">50</a>
+<a href="#L51">51</a>
+<a href="#L52">52</a>
+<a href="#L53">53</a>
+<a href="#L54">54</a>
+</pre>
+<pre><code class="ocaml">(*
+Introduction:
+This file is based on diff_algo with some modification. See diff_algo to get implementation detail
+*)
+
+[@@@warning "-32"]
+[@@@warning "-27"]
+
+open Core
+open Diff_algo
+open File_parse
+
+module String_merge_parser = struct
+  include String_parser
+  (* Convert list of string with label to string with no color *)
+  let ls2no_color_str (in_ls : content_section list) : string =
+    <span data-count="4">l</span>et rec ls2no_color_str_aux (unchecked : content_section list)
+    (checked : string) : string =
+    <span data-count="24">m</span>atch unchecked with
+    | <span data-count="4">[</span>] -&gt; checked
+    | <span data-count="20">(</span>t, v) :: tl -&gt; (
+        match t with
+        | <span data-count="11">C</span>ommon -&gt; ls2no_color_str_aux tl (checked ^ v)
+        | <span data-count="4">D</span>el -&gt; ls2no_color_str_aux tl (checked ^ v)
+        | <span data-count="5">A</span>dd -&gt; ls2no_color_str_aux tl (checked ^ v)
+        | N -&gt; assert false)
+  in
+  ls2no_color_str_aux in_ls ""
+
+end
+
+module Graph_search_for_merge = struct
+  include Graph_search
+  include File_struct
+  (* Merge all differences in two files into one file *)
+  let merge_all (str1 : string_file_content) (str2 : string_file_content) : string =
+    <span data-count="4">l</span>et array1, array2 =
+      ( String_process.string2word_arra<span data-count="4">y</span> ((content2strin<span data-count="4">g</span> str1)^" "),
+        String_process.string2word_arra<span data-count="4">y</span> ((content2strin<span data-count="4">g</span> str2^" ")) )
+    in
+    let seq = get_coordinate_seq array1 array2 in
+    <span data-count="4">l</span>et content_ls =
+      String_merge_parser.coordinates_to_content_list seq array1 array2
+    in
+    <span data-count="4">l</span>et common_string = String_merge_parser.ls2no_color_str content_ls in
+    <span data-count="4">c</span>ommon_string
+  (* Display merged result, but return nothing *)
+let disp_merge_all (filename1 : filename) (filename2 : filename) : unit =
+  <span data-count="0">l</span>et file_content1 = (File_struct.get_string_conten<span data-count="0">t</span> filename1)^" " in
+  let file_content2 = (File_struct.get_string_conten<span data-count="0">t</span> filename2)^" " in
+  print_string (merge_al<span data-count="0">l</span> ( string2conten<span data-count="0">t</span> file_content1) (string2conten<span data-count="0">t</span> file_content2))
+
+
+end
+</code></pre>
+      </div>
+    </div>
+    <script src="../coverage.js"></script>
+  </body>
+</html>
