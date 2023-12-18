@@ -166,14 +166,31 @@ let parse_command command =
       print_endline ("\027[32mFile created successfully at: " ^ !new_file_path)
   | Write -> write_to_file !output_file_path !input_lines
   | Insert ->
-      let updated =
-        List.mapi
-          (fun i line -> if i = !insert_line then insert_string line else line)
+      if !insert_line + 1 > List.length !input_lines then (
+        let appended_input_lines =
           !input_lines
-      in
-      update_lines updated input_lines input_history;
-      print_endline "\027[32mINSERTED SUCCESSFULLY:";
-      File_struct.display_content !input_lines
+          @ List.init
+              (1 + !insert_line - List.length !input_lines)
+              (fun _ -> "")
+        in
+        let updated =
+          List.mapi
+            (fun i line ->
+              if i = !insert_line then insert_string line else line)
+            appended_input_lines
+        in
+        update_lines updated input_lines input_history;
+        File_struct.display_content !input_lines)
+      else
+        let updated =
+          List.mapi
+            (fun i line ->
+              if i = !insert_line then insert_string line else line)
+            !input_lines
+        in
+        update_lines updated input_lines input_history;
+        print_endline "\027[32mINSERTED SUCCESSFULLY:";
+        File_struct.display_content !input_lines
   | Delete ->
       let updated =
         List.mapi
