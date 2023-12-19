@@ -194,7 +194,7 @@ let file_parse_test _ =
   in
   let filename =
     File_struct.string2filename
-      "/home/shang/fpse/final_version/fpse_project/text_manipulator/tests/ocaml_pair_1.ml"
+      "ocaml_pair_1.ml"
   in
   assert_equal "  2" @@ File_struct.get_line_number 2;
   assert_equal file_content_in_list
