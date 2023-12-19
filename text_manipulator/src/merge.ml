@@ -3,8 +3,6 @@ Introduction:
 This file is based on diff_algo with some modification. See diff_algo to get implementation detail
 *)
 
-[@@@warning "-32"]
-[@@@warning "-27"]
 
 open Core
 open Diff_algo

@@ -5,8 +5,6 @@ It uses a 2D graph to search for shortest path from point (0,0) to (lenght of st
 Reference:https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/ 
 *)
 
-[@@@warning "-32"]
-[@@@warning "-27"]
 
 open Core
 open File_parse

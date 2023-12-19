@@ -1,4 +1,4 @@
-(* open Core *)
+
 open OUnit2
 open Basic_feature
 open Merge
