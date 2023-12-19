@@ -45,6 +45,16 @@ let insert_string str =
     insert_char (str ^ padding) 0
   else insert_char str 0
 
+(*insert new line*)
+let insert_new_line lines line_number =
+  let rec helper acc i = function
+    | [] when i = line_number -> List.rev acc @ [""]
+    | hd :: tl when i = line_number -> List.rev acc @ [""; hd] @ tl
+    | hd :: tl -> helper (hd :: acc) (i + 1) tl
+    | [] -> List.rev acc  (* this is in case that line_number is greater than the list length *)
+  in
+  helper [] 0 lines
+  
 (*read*)
 let read input_file_path =
   (* read file content from input_file_path, from doc: "https://ocaml.org/docs/file-manipulation" *)

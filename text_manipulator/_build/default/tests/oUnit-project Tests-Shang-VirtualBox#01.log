@@ -1,0 +1,27 @@
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Start test project Tests:0:insert tests:0:insert1.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Test project Tests:0:insert tests:0:insert1 is successful.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: End test project Tests:0:insert tests:0:insert1.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Start test project Tests:3:delete test beyond:0:delete_test_beyond.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Test project Tests:3:delete test beyond:0:delete_test_beyond is successful.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: End test project Tests:3:delete test beyond:0:delete_test_beyond.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Start test project Tests:5:replace tests words:0:replace_words.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Test project Tests:5:replace tests words:0:replace_words is successful.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: End test project Tests:5:replace tests words:0:replace_words.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Start test project Tests:7:undo_multi:0:undo_multi.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Test project Tests:7:undo_multi:0:undo_multi is successful.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: End test project Tests:7:undo_multi:0:undo_multi.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Start test project Tests:9:Diff test:0:string parser test.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Test project Tests:9:Diff test:0:string parser test is successful.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: End test project Tests:9:Diff test:0:string parser test.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Start test project Tests:9:Diff test:1:string process test.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Test project Tests:9:Diff test:1:string process test is successful.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: End test project Tests:9:Diff test:1:string process test.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Start test project Tests:10:Merge test:0:Merge test.
+2023-12-19T22:46:23+00:00 Shang-VirtualBox#01 I: Test project Tests:10:Merge test:0:Merge test is successful.
+2023-12-19T22:46:24+00:00 Shang-VirtualBox#01 I: End test project Tests:10:Merge test:0:Merge test.
+2023-12-19T22:46:24+00:00 Shang-VirtualBox#01 I: Start test project Tests:12:test create file:0:test create file.
+2023-12-19T22:46:24+00:00 Shang-VirtualBox#01 I: Test project Tests:12:test create file:0:test create file is successful.
+2023-12-19T22:46:24+00:00 Shang-VirtualBox#01 I: End test project Tests:12:test create file:0:test create file.
+2023-12-19T22:46:24+00:00 Shang-VirtualBox#01 I: Start test project Tests:14:insert new line test:0:insert new line test.
+2023-12-19T22:46:24+00:00 Shang-VirtualBox#01 I: Test project Tests:14:insert new line test:0:insert new line test is successful.
+2023-12-19T22:46:24+00:00 Shang-VirtualBox#01 I: End test project Tests:14:insert new line test:0:insert new line test.

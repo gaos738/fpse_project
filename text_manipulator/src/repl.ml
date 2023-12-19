@@ -13,6 +13,7 @@ type action =
   | Replacepart
   | Search
   | Insert
+  | InsertNewLine
   | Undo
   | Read
   | Show
@@ -57,9 +58,12 @@ let merge_disp = ref ""
 (*usage message of how to use the commands inside the environment*)
 let usage_msg =
   "\027[37mExample usage: -action <argument>\n\
+   -create <file_path>\n\
+   -insertline <line>\n\
    -read <file_path>\n\
    -write <file_path>\n\
-   -replace <string_A> <string_B>\n\
+   -replaceword <string_A> <string_B>\n\
+   -replacepart <string_A> <string_B>\n\
    -search <string>\n\
    -insert <line> <column> <string>\n\
    -delete <line> <column>\n\
@@ -76,6 +80,12 @@ let speclist =
           new_file_path := p;
           action := Create),
       "create a new file" );
+    ("-insertline",
+      Arg.Int 
+        (fun l -> 
+          insert_line := l;
+          action := InsertNewLine), 
+      "Insert a new line at specified line number");
     ( "-read",
       Arg.String
         (fun p ->
@@ -88,7 +98,7 @@ let speclist =
           output_file_path := p;
           action := Write),
       "write a file" );
-    ("-show", Arg.Unit (fun _ -> action := Show), "show the editing content");
+    ( "-show", Arg.Unit (fun _ -> action := Show), "show the editing content");
     ( "-replaceword",
       Arg.Tuple
         [
@@ -105,7 +115,7 @@ let speclist =
           Arg.Unit (fun _ -> action := Replacepart);
         ],
       "replace A by B" );
-    ("-undo", Arg.Unit (fun _ -> action := Undo), "revert a previous action");
+    ( "-undo", Arg.Unit (fun _ -> action := Undo), "revert a previous action");
     ( "-search",
       Arg.Tuple [ Set_string search_A; Arg.Unit (fun _ -> action := Search) ],
       "search A" );
@@ -162,8 +172,15 @@ let parse_command command =
   match !action with
   | Show -> File_struct.display_content !input_lines
   | Create ->
-      create_file !new_file_path;
-      print_endline ("\027[32mFile created successfully at: " ^ !new_file_path)
+    let message = 
+      if Sys.file_exists !new_file_path then
+        "\027[31mError: File already exists at: " ^ !new_file_path
+      else (
+        create_file !new_file_path;
+        "\027[32mFile created successfully at: " ^ !new_file_path
+      )
+    in
+    print_endline message
   | Write -> write_to_file !output_file_path !input_lines
   | Insert ->
       if !insert_line + 1 > List.length !input_lines then (
@@ -191,6 +208,11 @@ let parse_command command =
         update_lines updated input_lines input_history;
         print_endline "\027[32mINSERTED SUCCESSFULLY:";
         File_struct.display_content !input_lines
+  | InsertNewLine ->
+      input_lines := insert_new_line !input_lines !insert_line;
+      update_lines !input_lines input_lines input_history;
+      print_endline "\027[32mNew line inserted successfully.";
+      File_struct.display_content !input_lines;
   | Delete ->
       let updated =
         List.mapi

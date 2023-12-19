@@ -18,6 +18,13 @@ let insert_test_beyond _ =
   let res = insert_string "01234" in
   assert_equal res "01234   DEF"
 
+let test_insert_new_line _ =
+  let initial_lines = ["line1"; "line2"; "line3"] in
+  (* Empty line inserted at index 2 *)
+  let expected_lines = ["line1"; "line2"; ""; "line3"] in  
+  let result_lines = insert_new_line initial_lines 2 in
+  assert_equal expected_lines result_lines ~printer:(String.concat ", ")
+
 let delete_test_1 _ =
   delete_line := 0;
   delete_col := 0;
@@ -194,7 +201,7 @@ let file_parse_test _ =
   in
   let filename =
     File_struct.string2filename
-      "/home/shang/fpse/final_version/fpse_project/text_manipulator/tests/ocaml_pair_1.ml"
+      "ocaml_pair_1.ml"
   in
   assert_equal "  2" @@ File_struct.get_line_number 2;
   assert_equal file_content_in_list
@@ -226,6 +233,10 @@ let insert_tests = "insert tests" >: test_list [ "insert1" >:: insert_test_1 ]
 let insert_tests_2 =
   "insert tests beyond"
   >: test_list [ "insert_test_beyond" >:: insert_test_beyond ]
+
+let insert_tests_3_new_line =
+  "insert new line test"
+  >: test_list [ "insert new line test" >:: test_insert_new_line ] 
 
 let delete_tests = "delete tests" >: test_list [ "delete" >:: delete_test_1 ]
 
@@ -284,6 +295,7 @@ let series =
          file_parse_test;
          test_create;
          test_write;
+         insert_tests_3_new_line;
        ]
 
 let () = run_test_tt_main series

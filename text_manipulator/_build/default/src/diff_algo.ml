@@ -108,13 +108,17 @@ module String_process = struct
   (* Remove whitespace *)
   let rm_whitespace (str : string) : string =
     String.filter str ~f:(fun char -> not (Char.equal char ' '))
+  
+  (* Remove \n *)
+  let rm_change_line_symbol (str : string) : string =
+    String.filter str ~f:(fun char -> not (Char.equal char '\n'))
 
   (* Equality check at index *)
   let str_equal_at_index (str1 : string array) (str2 : string array)
       (coordinate : word_coordinate) : bool =
     let x, y = coordinate in
-    let x_content = rm_whitespace (Array.get str1 x) in
-    let y_content = rm_whitespace (Array.get str2 y) in
+    let x_content = (Array.get str1 x) |> rm_change_line_symbol |> rm_whitespace in
+    let y_content = (Array.get str2 y) |> rm_change_line_symbol |> rm_whitespace in
     String.equal x_content y_content
 
   let string_hd (input_str : string) : string * string =

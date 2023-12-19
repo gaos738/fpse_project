@@ -21,6 +21,9 @@ val insert_A : string ref
   If [insert_col] is beyond the end of the text str, no insertion is made. *)
 val insert_string : string -> string
 
+(*insert new line*)
+val insert_new_line : string list -> int -> string list
+
 (*read*)
 val read : string ref -> string list
 
