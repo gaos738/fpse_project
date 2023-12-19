@@ -13,6 +13,10 @@ To read a file inside APP:
 ```
 -read <file_path>
 ```
+To create a new file
+```
+-create <file_path>
+```
 To show the editing content inside APP:
 ```
 -show <file_path>
@@ -33,13 +37,17 @@ To search <A> inside APP:
 ```
 -search <A>
 ```
+To insert a new line inside APP:
+```
+-insertline <line_number>
+```
 To insert <A> at line x and column y inside APP:
 ```
--insert x y <A>
+-insert <line_number> <col_number> <A>
 ```
 To delete <A> at line x and column y inside APP:
 ```
--delete x y <A>
+-delete <line_number> <col_number> <A>
 ```
 To show diff between file <file_path> with current editing file inside APP:
 ```
