@@ -61,8 +61,9 @@ To flush all changes of current edited content into file inside APP:
 ```
 -write <file_path>
 ```
-
-## Reference
+##Test
+When running dune test, please run dune build first. Because we are using some txt file in /test folder to test, without a dune build, files will not be moved to _build/default/tests and it will report files does not exist error.
+##Reference
 https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
 
 An O(ND) Difference Algorithm and Its Variations∗ EUGENE W. MYERS
